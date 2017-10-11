@@ -13,13 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(value = MyException.class)
+    @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public ErrorInfo defaultErrorHandler(HttpServletRequest request, MyException e) throws Exception {
+    public ErrorInfo defaultErrorHandler(HttpServletRequest request, Exception e) throws Exception {
         ErrorInfo info = new ErrorInfo();
         info.setCode(100);
         info.setMessage(e.getMessage());
         info.setUrl(request.getRequestURL().toString());
         return info;
     }
+
 }
