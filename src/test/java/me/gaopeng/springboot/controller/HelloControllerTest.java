@@ -1,9 +1,11 @@
 package me.gaopeng.springboot.controller;
 
+import me.gaopeng.springboot.mapper.UserMapper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -23,6 +25,9 @@ public class HelloControllerTest {
 
     private MockMvc mvc;
 
+    @Autowired
+    private UserMapper userMapper;
+
     @Before
     public void setUp() throws Exception {
         mvc = MockMvcBuilders.standaloneSetup(new HelloController()).build();
@@ -37,6 +42,11 @@ public class HelloControllerTest {
         mvc.perform(MockMvcRequestBuilders.get("/"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Hello Spring Boot!"));
+    }
+
+    @Test
+    public void testMysql() {
+        userMapper.insert("test", 1010);
     }
 
 }
